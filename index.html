@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PWS 8 JULI 2026</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+    color: #1f2937;
+    overflow: hidden;
+    position: relative;
+    background: #0a0e1a;
+  }
+
+  /* ==== LAYER 1: Brushed metal base (garis-garis halus metalik) ==== */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      repeating-linear-gradient(
+        92deg,
+        rgba(255,255,255,0.035) 0px,
+        rgba(255,255,255,0.035) 1px,
+        transparent 1px,
+        transparent 3px
+      ),
+      repeating-linear-gradient(
+        88deg,
+        rgba(0,0,0,0.15) 0px,
+        rgba(0,0,0,0.15) 1px,
+        transparent 1px,
+        transparent 4px
+      );
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.8;
+  }
+
+  /* ==== LAYER 2: Deep silver gradient + conic shine (background utama) ==== */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: -20%;
+    background:
+      conic-gradient(
+        from 220deg at 50% 50%,
+        #0f172a 0deg,
+        #475569 60deg,
+        #e2e8f0 120deg,
+        #94a3b8 180deg,
+        #1e293b 240deg,
+        #cbd5e1 300deg,
+        #0f172a 360deg
+      );
+    z-index: -2;
+    filter: blur(60px) saturate(1.1);
+    opacity: 0.9;
+    animation: putar 40s linear infinite;
+  }
+
+  @keyframes putar {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+
+  /* ==== LAYER 3: Radial vignette (penggelapan pinggir) ==== */
+  .bg-vignette {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(
+      ellipse at center,
+      transparent 0%,
+      transparent 35%,
+      rgba(0,0,0,0.55) 80%,
+      rgba(0,0,0,0.9) 100%
+    );
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  /* ==== LAYER 4: Floating chrome orbs ==== */
+  .orbs {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle at 30% 30%,
+      #ffffff 0%,
+      #e2e8f0 25%,
+      #94a3b8 55%,
+      #334155 85%,
+      #0f172a 100%
+    );
+    box-shadow:
+      0 0 60px rgba(255,255,255,0.35),
+      0 0 120px rgba(148,163,184,0.25),
+      inset -8px -8px 20px rgba(0,0,0,0.4),
+      inset 8px 8px 20px rgba(255,255,255,0.6);
+    filter: blur(0.5px);
+    opacity: 0.85;
+  }
+  .orb-1 {
+    width: 180px; height: 180px;
+    top: 8%; left: 6%;
+    animation: melayang1 14s ease-in-out infinite;
+  }
+  .orb-2 {
+    width: 120px; height: 120px;
+    bottom: 12%; right: 8%;
+    animation: melayang2 18s ease-in-out infinite;
+  }
+  .orb-3 {
+    width: 90px; height: 90px;
+    top: 55%; left: 12%;
+    animation: melayang3 16s ease-in-out infinite;
+  }
+  .orb-4 {
+    width: 60px; height: 60px;
+    top: 18%; right: 18%;
+    opacity: 0.65;
+    animation: melayang2 12s ease-in-out infinite reverse;
+  }
+  .orb-5 {
+    width: 45px; height: 45px;
+    bottom: 22%; left: 25%;
+    opacity: 0.6;
+    animation: melayang1 20s ease-in-out infinite reverse;
+  }
+
+  @keyframes melayang1 {
+    0%,100% { transform: translate(0,0) scale(1); }
+    33%     { transform: translate(40px, -30px) scale(1.08); }
+    66%     { transform: translate(-25px, 25px) scale(0.95); }
+  }
+  @keyframes melayang2 {
+    0%,100% { transform: translate(0,0) scale(1); }
+    50%     { transform: translate(-50px, -40px) scale(1.1); }
+  }
+  @keyframes melayang3 {
+    0%,100% { transform: translate(0,0) scale(1); }
+    25%     { transform: translate(30px, 40px) scale(1.05); }
+    75%     { transform: translate(-40px, -20px) scale(0.9); }
+  }
+
+  /* ==== LAYER 5: Sparkle/star particles ==== */
+  .sparkles {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+      radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,0.9), transparent),
+      radial-gradient(2px 2px at 60% 70%, rgba(255,255,255,0.8), transparent),
+      radial-gradient(1px 1px at 80% 20%, rgba(255,255,255,0.9), transparent),
+      radial-gradient(2px 2px at 35% 85%, rgba(255,255,255,0.7), transparent),
+      radial-gradient(1px 1px at 90% 55%, rgba(255,255,255,0.9), transparent),
+      radial-gradient(1.5px 1.5px at 15% 60%, rgba(255,255,255,0.8), transparent),
+      radial-gradient(1px 1px at 45% 15%, rgba(255,255,255,0.85), transparent),
+      radial-gradient(1.5px 1.5px at 70% 45%, rgba(255,255,255,0.75), transparent);
+    animation: kedip 4s ease-in-out infinite;
+  }
+  @keyframes kedip {
+    0%,100% { opacity: 0.4; }
+    50%     { opacity: 1; }
+  }
+
+  /* ===========================
+     KARTU CHROME (sama seperti sebelumnya)
+     =========================== */
+  .kartu {
+    position: relative;
+    width: 400px;
+    max-width: 100%;
+    padding: 3px;
+    border-radius: 24px;
+    background: linear-gradient(
+      145deg,
+      #ffffff 0%,
+      #d1d5db 12%,
+      #6b7280 25%,
+      #f9fafb 38%,
+      #9ca3af 50%,
+      #e5e7eb 62%,
+      #4b5563 75%,
+      #d1d5db 88%,
+      #ffffff 100%
+    );
+    box-shadow:
+      0 30px 70px rgba(0, 0, 0, 0.7),
+      0 0 60px rgba(255, 255, 255, 0.2),
+      inset 0 1px 2px rgba(255,255,255,0.9);
+    animation: masuk 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 1;
+  }
+
+  @keyframes masuk {
+    from { opacity: 0; transform: translateY(30px) scale(0.95); }
+    to   { opacity: 1; transform: translateY(0)    scale(1); }
+  }
+
+  .inner {
+    position: relative;
+    border-radius: 22px;
+    padding: 30px 26px 26px;
+    background: linear-gradient(
+      160deg,
+      #f8fafc 0%,
+      #e2e8f0 20%,
+      #cbd5e1 45%,
+      #e2e8f0 70%,
+      #f1f5f9 100%
+    );
+    overflow: hidden;
+  }
+
+  .inner::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -50%;
+    width: 200%; height: 100%;
+    background: linear-gradient(
+      115deg,
+      transparent 30%,
+      rgba(255,255,255,0.75) 45%,
+      rgba(255,255,255,0.9) 50%,
+      rgba(255,255,255,0.75) 55%,
+      transparent 70%
+    );
+    pointer-events: none;
+    animation: kilau 5s ease-in-out infinite;
+  }
+
+  @keyframes kilau {
+    0%   { transform: translateX(-60%); }
+    50%  { transform: translateX(60%); }
+    100% { transform: translateX(-60%); }
+  }
+
+  .inner > * { position: relative; z-index: 1; }
+
+  h3 {
+    text-align: center;
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+    font-weight: 800;
+    text-transform: uppercase;
+    background: linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #64748b 25%,
+      #1e293b 50%,
+      #64748b 75%,
+      #cbd5e1 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+    margin-bottom: 4px;
+  }
+
+  .sub {
+    text-align: center;
+    font-size: 0.68rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #64748b;
+    font-weight: 600;
+    margin-bottom: 18px;
+  }
+
+  .divider {
+    height: 2px;
+    border: none;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      #94a3b8 20%,
+      #ffffff 50%,
+      #94a3b8 80%,
+      transparent
+    );
+    margin: 18px 0;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.8);
+  }
+
+  .identitas { text-align: center; margin-bottom: 20px; }
+
+  .identitas h4 {
+    font-size: 0.98rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    background: linear-gradient(180deg, #334155, #0f172a);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.7);
+  }
+
+  .nim {
+    display: inline-block;
+    margin-top: 8px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    font-weight: 700;
+    padding: 4px 14px;
+    border-radius: 8px;
+    color: #1e293b;
+    background: linear-gradient(145deg, #ffffff, #cbd5e1);
+    border: 1px solid #94a3b8;
+    box-shadow:
+      inset 0 1px 0 #ffffff,
+      inset 0 -1px 2px rgba(0,0,0,0.15),
+      0 2px 6px rgba(0,0,0,0.2);
+    text-shadow: 0 1px 0 rgba(255,255,255,0.9);
+  }
+
+  .cari-box {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+
+  .cari-box input {
+    flex: 1;
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 1px solid #94a3b8;
+    background: linear-gradient(180deg, #ffffff, #e2e8f0);
+    color: #0f172a;
+    font-size: 0.9rem;
+    outline: none;
+    transition: all 0.25s ease;
+    font-family: inherit;
+    box-shadow:
+      inset 0 2px 4px rgba(0,0,0,0.08),
+      inset 0 -1px 0 rgba(255,255,255,0.9),
+      0 1px 0 rgba(255,255,255,0.7);
+  }
+  .cari-box input::placeholder { color: #94a3b8; }
+  .cari-box input:focus {
+    border-color: #475569;
+    box-shadow:
+      inset 0 2px 4px rgba(0,0,0,0.1),
+      0 0 0 3px rgba(148, 163, 184, 0.4),
+      0 1px 0 rgba(255,255,255,0.9);
+    background: linear-gradient(180deg, #ffffff, #f1f5f9);
+  }
+
+  .cari-box button {
+    padding: 12px 20px;
+    border: 1px solid #475569;
+    border-radius: 12px;
+    background: linear-gradient(
+      180deg,
+      #f1f5f9 0%,
+      #cbd5e1 45%,
+      #94a3b8 55%,
+      #e2e8f0 100%
+    );
+    color: #0f172a;
+    font-weight: 800;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.85);
+    box-shadow:
+      inset 0 1px 0 #ffffff,
+      inset 0 -2px 4px rgba(0,0,0,0.2),
+      0 3px 8px rgba(0,0,0,0.25);
+  }
+  .cari-box button:hover {
+    background: linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #e2e8f0 45%,
+      #cbd5e1 55%,
+      #f1f5f9 100%
+    );
+    transform: translateY(-1px);
+    box-shadow:
+      inset 0 1px 0 #ffffff,
+      inset 0 -2px 4px rgba(0,0,0,0.15),
+      0 6px 14px rgba(0,0,0,0.3);
+  }
+  .cari-box button:active {
+    transform: translateY(1px);
+    box-shadow:
+      inset 0 2px 4px rgba(0,0,0,0.25),
+      0 1px 2px rgba(0,0,0,0.2);
+  }
+
+  #out p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    margin-bottom: 7px;
+    font-size: 0.82rem;
+    border-radius: 10px;
+    background: linear-gradient(180deg, #ffffff 0%, #e2e8f0 100%);
+    border: 1px solid #cbd5e1;
+    box-shadow:
+      inset 0 1px 0 #ffffff,
+      0 2px 4px rgba(0,0,0,0.08);
+    animation: fadeIn 0.4s ease;
+  }
+
+  #out p span:first-child {
+    color: #64748b;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.68rem;
+    letter-spacing: 1px;
+  }
+  #out p span:last-child {
+    text-align: right;
+    color: #0f172a;
+    font-weight: 700;
+    word-break: break-word;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.9);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateX(-8px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+</style>
+</head>
+<body>
+
+  <!-- Layer background -->
+  <div class="bg-vignette"></div>
+  <div class="orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="orb orb-4"></div>
+    <div class="orb orb-5"></div>
+  </div>
+  <div class="sparkles"></div>
+
+  <!-- Kartu -->
+  <div class="kartu">
+    <div class="inner">
+      <h3>PWS 8 JULI 2026</h3>
+      <p class="sub">Geocoding Dashboard</p>
+      <hr class="divider">
+      <div class="identitas">
+        <h4>PEBRI BAYU SATRIANSYAH</h4>
+        <span class="nim">20240140058</span>
+      </div>
+
+      <div class="cari-box">
+        <input id="q" value="Kota Bandung" placeholder="Cari lokasi...">
+        <button onclick="cari()">Search</button>
+      </div>
+
+      <div id="out"></div>
+    </div>
+  </div>
+
+<script>
+async function cari(){
+  const q = document.getElementById('q').value;
+  const out = document.getElementById('out');
+  out.innerHTML = '<p><span>Memuat</span><span>⏳</span></p>';
+
+  try {
+    const r = await fetch(`https://api.maptiler.com/geocoding/${encodeURIComponent(q)}.json?key=V2a5AbM6p2dM8zoEm5wJ&language=id&country=id&limit=1`);
+    const d = await r.json();
+    const f = d.features[0];
+    if (!f) { out.innerHTML = '<p><span>Hasil</span><span>Tidak ditemukan</span></p>'; return; }
+    const c = f.context || [];
+    const g = p => (c.find(x => x.id.startsWith(p)) || {}).text || '-';
+
+    out.innerHTML = `
+      <p><span>Lokasi</span><span>${f.place_name}</span></p>
+      <p><span>Negara</span><span>${g('country')}</span></p>
+      <p><span>Provinsi</span><span>${g('region')}</span></p>
+      <p><span>Kecamatan</span><span>${g('municipality')}</span></p>
+      <p><span>Longitude</span><span>${f.geometry.coordinates[0]}</span></p>
+      <p><span>Latitude</span><span>${f.geometry.coordinates[1]}</span></p>`;
+  } catch (e) {
+    out.innerHTML = '<p><span>Error</span><span>Gagal memuat data</span></p>';
+  }
+}
+cari();
+</script>
+</body>
+</html>
